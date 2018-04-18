@@ -1,0 +1,19 @@
+PV_RATE_LIMIT=${PV_RATE_LIMIT:-20}
+PAUSE_DURATION=${PAUSE_DURATION:-2}
+
+function announce {
+    echo -e "\e[33m# $@\e[39m" | pv -qL ${PV_RATE_LIMIT}
+}
+
+function pause {
+    sleep ${PAUSE_DURATION}
+}
+
+function run {
+    echo -e "\e[34m$ \e[94m$@\e[39m" | pv -qL ${PV_RATE_LIMIT}
+    "$@"
+}
+
+function fake_run {
+    echo -e "\e[34m$ \e[94m$@\e[39m" | pv -qL ${PV_RATE_LIMIT}
+}
